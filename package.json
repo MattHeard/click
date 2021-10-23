@@ -1,0 +1,21 @@
+{
+  "name": "click",
+  "version": "1.0.0",
+  "description": "Click the buttons to make the numbers bigger",
+  "main": "index.js",
+  "repository": "https://github.com/MattHeard/click",
+  "author": "Matthew Heard",
+  "license": "None",
+  "devDependencies": {
+    "elm-hot": "^1.1.6",
+    "node-elm-compiler": "^5.0.6",
+    "parcel-bundler": "^1.12.5"
+  },
+  "dependencies": {
+    "elm": "^0.19.1-5"
+  },
+  "scripts": {
+    "start": "parcel src/index.html",
+    "build": "parcel build src/index.html"
+  }
+}
