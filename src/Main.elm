@@ -3,14 +3,17 @@ module Main exposing (main)
 import Browser
 import Html exposing (Html, button, div, text)
 import Html.Events exposing (onClick)
-import Json.Encode as Encode exposing (encode, int)
+import Json.Decode as Decode exposing (decodeString)
+import Json.Encode as Encode exposing (encode)
 
 import Ports
 
-main : Program () Model Msg
+type alias RetrievedState = Maybe String
+
+main : Program RetrievedState Model Msg
 main =
   Browser.element
-    { init = \flags -> init
+    { init = init
     , update = update
     , view = view
     , subscriptions = \_ -> Sub.none
@@ -19,9 +22,18 @@ main =
 type Msg = Increment
 type alias Model = Int
 
-init : ( Model, Cmd msg )
-init =
-  ( 0, Cmd.none )
+init : Maybe String -> ( Model, Cmd msg )
+init flags =
+  let
+    model =
+      case flags of
+        Just modelJson ->
+          decodeStoredModel modelJson
+
+        Nothing ->
+          0
+  in
+  ( model, Cmd.none )
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
@@ -43,5 +55,13 @@ view model =
 
 saveModel : Int -> Cmd msg
 saveModel model =
-  encode 0 (int model)
+  encode 0 (Encode.int model)
     |> Ports.storeModel
+
+decodeStoredModel : String -> Model
+decodeStoredModel modelJson =
+  case decodeString Decode.int modelJson of
+    Ok model ->
+      model
+    Err _ ->
+      0
