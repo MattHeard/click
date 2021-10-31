@@ -17,6 +17,7 @@
   },
   "scripts": {
     "start": "parcel src/index.html",
-    "build": "parcel build src/index.html"
+    "build": "elm-test && parcel build src/index.html",
+    "test": "elm-test"
   }
 }
