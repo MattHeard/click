@@ -69,12 +69,18 @@ view model =
 contents : Model -> List (Html Msg)
 contents model =
     [ renderFunds model
+    , renderFundsIncrement 1
     , renderIncrementButton
     ]
 
 
 renderFunds : Model -> Html Msg
 renderFunds model =
+    model |> String.fromInt |> text
+
+
+renderFundsIncrement : Model -> Html Msg
+renderFundsIncrement model =
     model |> String.fromInt |> text
 
 
