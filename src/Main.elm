@@ -27,6 +27,10 @@ type Msg
 
 
 type alias Model =
+    FundsAmount
+
+
+type alias FundsAmount =
     Int
 
 
@@ -89,7 +93,7 @@ renderIncrementButton =
     button [ onClick Increment ] [ text "+" ]
 
 
-saveModel : Int -> Cmd msg
+saveModel : FundsAmount -> Cmd msg
 saveModel model =
     encode 0 (Encode.int model)
         |> Ports.storeModel
