@@ -75,6 +75,7 @@ contents model =
     [ renderFunds model
     , renderFundsIncrement 1
     , renderIncrementButton
+    , renderVersion
     ]
 
 
@@ -91,6 +92,9 @@ renderFundsIncrement model =
 renderIncrementButton : Html Msg
 renderIncrementButton =
     button [ onClick Increment ] [ text "+" ]
+
+renderVersion : Html Msg
+renderVersion = text "4"
 
 
 saveModel : FundsAmount -> Cmd msg
