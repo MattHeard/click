@@ -56,9 +56,12 @@ update msg model =
                 newModel =
                     model + 1
             in
-            ((\save -> ( newModel
-            , saveModel newModel
-            )) saveModel)
+            (\save ->
+                ( newModel
+                , saveModel newModel
+                )
+            )
+                saveModel
 
 
 view : Model -> Html Msg
@@ -93,8 +96,10 @@ renderIncrementButton : Html Msg
 renderIncrementButton =
     button [ onClick Increment ] [ text "+" ]
 
+
 renderVersion : Html Msg
-renderVersion = text "5"
+renderVersion =
+    text "5"
 
 
 saveModel : FundsAmount -> Cmd msg
