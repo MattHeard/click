@@ -50,18 +50,20 @@ init flags =
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
+    updateAndSave saveModel msg model
+
+
+updateAndSave : (FundsAmount -> Cmd Msg) -> Msg -> Model -> ( Model, Cmd Msg )
+updateAndSave save msg model =
     case msg of
         Increment ->
             let
                 newModel =
                     model + 1
             in
-            (\save ->
-                ( newModel
-                , saveModel newModel
-                )
+            ( newModel
+            , save newModel
             )
-                saveModel
 
 
 view : Model -> Html Msg
