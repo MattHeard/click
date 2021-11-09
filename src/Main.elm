@@ -101,7 +101,7 @@ renderIncrementButton =
 
 renderVersion : Html Msg
 renderVersion =
-    text "5"
+    text "6"
 
 
 saveModel : FundsAmount -> Cmd msg
