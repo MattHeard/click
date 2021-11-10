@@ -13,7 +13,7 @@ type Msg
     = Increment
 
 
-updateModelAndUpdateCache : (Model -> Cmd Msg) -> Msg -> Model -> ( Model, Cmd Msg )
+updateModelAndUpdateCache : (Model -> Cmd msg) -> Msg -> Model -> ( Model, Cmd msg )
 updateModelAndUpdateCache save msg model =
     case msg of
         Increment ->
