@@ -6,6 +6,7 @@ import Html.Events exposing (onClick)
 import Json.Decode as Decode exposing (decodeString)
 import Json.Encode as Encode exposing (encode)
 import Ports
+import Update exposing (Model, Msg(..), updateModelAndUpdateCache)
 
 
 type alias RetrievedState =
@@ -20,18 +21,6 @@ main =
         , view = view
         , subscriptions = \_ -> Sub.none
         }
-
-
-type Msg
-    = Increment
-
-
-type alias Model =
-    FundsAmount
-
-
-type alias FundsAmount =
-    Int
 
 
 init : Maybe String -> ( Model, Cmd msg )
@@ -51,19 +40,6 @@ init flags =
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     updateModelAndUpdateCache saveModel msg model
-
-
-updateModelAndUpdateCache : (FundsAmount -> Cmd Msg) -> Msg -> Model -> ( Model, Cmd Msg )
-updateModelAndUpdateCache save msg model =
-    case msg of
-        Increment ->
-            let
-                newModel =
-                    model + 1
-            in
-            ( newModel
-            , save newModel
-            )
 
 
 view : Model -> Html Msg
@@ -104,10 +80,10 @@ renderIncrementButton =
 renderVersion : Html Msg
 renderVersion =
     -- todo: inject magic number
-    text "8"
+    text "9"
 
 
-saveModel : FundsAmount -> Cmd msg
+saveModel : Model -> Cmd msg
 saveModel model =
     encode 0 (Encode.int model)
         |> Ports.storeModel
