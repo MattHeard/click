@@ -78,7 +78,9 @@ view model =
 contents : Model -> List (Html Msg)
 contents model =
     [ renderFunds model
-    , renderFundsIncrement 1 -- todo: move magic number into model
+
+    -- todo: move magic number into model
+    , renderFundsIncrement 1
     , renderIncrementButton
     , renderVersion
     ]
@@ -101,7 +103,8 @@ renderIncrementButton =
 
 renderVersion : Html Msg
 renderVersion =
-    text "7" -- todo: inject magic number
+    -- todo: inject magic number
+    text "7"
 
 
 saveModel : FundsAmount -> Cmd msg
