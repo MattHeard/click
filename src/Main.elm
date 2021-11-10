@@ -50,11 +50,11 @@ init flags =
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
-    updateAndSave saveModel msg model
+    updateModelAndUpdateCache saveModel msg model
 
 
-updateAndSave : (FundsAmount -> Cmd Msg) -> Msg -> Model -> ( Model, Cmd Msg )
-updateAndSave save msg model =
+updateModelAndUpdateCache : (FundsAmount -> Cmd Msg) -> Msg -> Model -> ( Model, Cmd Msg )
+updateModelAndUpdateCache save msg model =
     case msg of
         Increment ->
             let
