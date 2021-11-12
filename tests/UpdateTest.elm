@@ -3,7 +3,7 @@ module UpdateTest exposing (..)
 import Expect exposing (Expectation)
 import Fuzz exposing (Fuzzer, int, list, string)
 import Test exposing (..)
-import Update exposing (Msg(..), updateModelAndUpdateCache)
+import Update exposing (Msg(..), updateModel)
 
 
 suite : Test
@@ -12,9 +12,6 @@ suite =
         [ test "adds one to the model" <|
             \_ ->
                 Expect.equal
-                    (updateModelAndUpdateCache
-                        (\arg -> Cmd.none)
-                        Increment
-                        0)
-                    ( 1, Cmd.none )
+                    (updateModel Increment 0)
+                    1
         ]

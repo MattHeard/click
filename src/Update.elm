@@ -1,4 +1,4 @@
-module Update exposing (Model, Msg(..), updateModelAndUpdateCache)
+module Update exposing (Model, Msg(..), updateModel, updateModelAndUpdateCache)
 
 
 type alias Model =
