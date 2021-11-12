@@ -2,7 +2,8 @@ module Update exposing (Model, Msg(..), updateModel)
 
 
 type alias Model =
-    FundsAmount
+    { fundsAmount : FundsAmount
+    }
 
 
 type alias FundsAmount =
@@ -13,13 +14,12 @@ type Msg
     = Increment
 
 
-
 updateModel : Msg -> Model -> Model
 updateModel msg model =
     case msg of
         Increment ->
             let
                 newModel =
-                    model + 1
+                    { fundsAmount = model.fundsAmount + 1 }
             in
             newModel

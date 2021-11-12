@@ -32,7 +32,7 @@ init flags =
                     decodeStoredModel modelJson
 
                 Nothing ->
-                    0
+                    { fundsAmount = 0 }
     in
     ( model, Cmd.none )
 
@@ -41,9 +41,11 @@ update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     updateModelAndUpdateCache saveModel msg model
 
+
 updateModelAndUpdateCache : (Model -> Cmd msg) -> Msg -> Model -> ( Model, Cmd msg )
 updateModelAndUpdateCache save msg model =
     updateModel msg model |> getTupleWithSave save
+
 
 getTupleWithSave : (Model -> Cmd msg) -> Model -> ( Model, Cmd msg )
 getTupleWithSave save model =
@@ -66,18 +68,18 @@ contents model =
     -- todo: move magic number into model
     , renderFundsIncrement 1
     , renderIncrementButton
-    , renderVersion
+    , renderVersion "12"
     ]
 
 
 renderFunds : Model -> Html Msg
 renderFunds model =
-    model |> String.fromInt |> text
+    model.fundsAmount |> String.fromInt |> text
 
 
-renderFundsIncrement : Model -> Html Msg
-renderFundsIncrement model =
-    model |> String.fromInt |> text
+renderFundsIncrement : Int -> Html Msg
+renderFundsIncrement incrementAmount =
+    incrementAmount |> String.fromInt |> text
 
 
 renderIncrementButton : Html Msg
@@ -85,15 +87,14 @@ renderIncrementButton =
     button [ onClick Increment ] [ text "+" ]
 
 
-renderVersion : Html Msg
-renderVersion =
-    -- todo: inject magic number
-    text "11"
+renderVersion : String -> Html Msg
+renderVersion version =
+    text version
 
 
 saveModel : Model -> Cmd msg
 saveModel model =
-    encode 0 (Encode.int model)
+    encode 0 (Encode.int model.fundsAmount)
         |> Ports.storeModel
 
 
@@ -101,7 +102,7 @@ decodeStoredModel : String -> Model
 decodeStoredModel modelJson =
     case decodeString Decode.int modelJson of
         Ok model ->
-            model
+            { fundsAmount = model }
 
         Err _ ->
-            0
+            { fundsAmount = 0 }

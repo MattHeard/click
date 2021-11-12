@@ -12,6 +12,9 @@ suite =
         [ test "adds one to the model" <|
             \_ ->
                 Expect.equal
-                    (updateModel Increment 0)
-                    1
+                    (updateModel
+                        Increment
+                        { fundsAmount = 0 }
+                    )
+                    { fundsAmount = 1 }
         ]
