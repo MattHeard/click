@@ -6,7 +6,7 @@ import Html.Events exposing (onClick)
 import Json.Decode as Decode exposing (decodeString)
 import Json.Encode as Encode exposing (encode)
 import Ports
-import Update exposing (Model, Msg(..), updateModelAndUpdateCache)
+import Update exposing (Model, Msg(..), updateModel)
 
 
 type alias RetrievedState =
@@ -40,6 +40,14 @@ init flags =
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     updateModelAndUpdateCache saveModel msg model
+
+updateModelAndUpdateCache : (Model -> Cmd msg) -> Msg -> Model -> ( Model, Cmd msg )
+updateModelAndUpdateCache save msg model =
+    updateModel msg model |> getTupleWithSave save
+
+getTupleWithSave : (Model -> Cmd msg) -> Model -> ( Model, Cmd msg )
+getTupleWithSave save model =
+    ( model, save model )
 
 
 view : Model -> Html Msg
@@ -80,7 +88,7 @@ renderIncrementButton =
 renderVersion : Html Msg
 renderVersion =
     -- todo: inject magic number
-    text "10"
+    text "11"
 
 
 saveModel : Model -> Cmd msg
