@@ -80,7 +80,7 @@ renderIncrementButton =
 renderVersion : Html Msg
 renderVersion =
     -- todo: inject magic number
-    text "9"
+    text "10"
 
 
 saveModel : Model -> Cmd msg
