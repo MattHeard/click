@@ -3,7 +3,7 @@ module UpdateTest exposing (..)
 import Expect exposing (Expectation)
 import Fuzz exposing (Fuzzer, int, list, string)
 import Test exposing (..)
-import Update exposing (Msg(..), updateModel)
+import Update exposing (Model, Msg(..), updateModel)
 
 
 suite : Test
@@ -14,11 +14,13 @@ suite =
                 Expect.equal
                     (updateModel
                         Increment
-                        { fundsAmount = 0
-                        , incrementAmount = 1
-                        }
+                        (buildTestModel 0)
                     )
-                    { fundsAmount = 1
-                    , incrementAmount = 1
-                    }
+                    (buildTestModel 1)
         ]
+
+buildTestModel : Int -> Model
+buildTestModel fundsAmount =
+    { fundsAmount = fundsAmount
+    , incrementAmount = 1
+    }
