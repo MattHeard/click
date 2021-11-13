@@ -68,7 +68,7 @@ contents model =
     -- todo: move magic number into model
     , renderFundsIncrement 1
     , renderIncrementButton
-    , renderVersion "12"
+    , renderVersion "13"
     ]
 
 
