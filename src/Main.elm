@@ -32,7 +32,9 @@ init flags =
                     decodeStoredModel modelJson
 
                 Nothing ->
-                    { fundsAmount = 0 }
+                    { fundsAmount = 0
+                    , incrementAmount = 1
+                    }
     in
     ( model, Cmd.none )
 
@@ -102,7 +104,11 @@ decodeStoredModel : String -> Model
 decodeStoredModel modelJson =
     case decodeString Decode.int modelJson of
         Ok model ->
-            { fundsAmount = model }
+            { fundsAmount = model
+            , incrementAmount = 1
+            }
 
         Err _ ->
-            { fundsAmount = 0 }
+            { fundsAmount = 0
+            , incrementAmount = 1
+            }

@@ -14,7 +14,11 @@ suite =
                 Expect.equal
                     (updateModel
                         Increment
-                        { fundsAmount = 0 }
+                        { fundsAmount = 0
+                        , incrementAmount = 1
+                        }
                     )
-                    { fundsAmount = 1 }
+                    { fundsAmount = 1
+                    , incrementAmount = 1
+                    }
         ]
