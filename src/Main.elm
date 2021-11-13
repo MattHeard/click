@@ -65,23 +65,24 @@ view model =
 
 contents : Model -> List (Html Msg)
 contents model =
-    [ renderFunds model
-
-    -- todo: move magic number into model
+    [ renderFunds model.fundsAmount
     , renderFundsIncrement model.incrementAmount
     , renderIncrementButton
     , renderVersion "13"
     ]
 
 
-renderFunds : Model -> Html Msg
-renderFunds model =
-    model.fundsAmount |> String.fromInt |> text
+renderFunds : Int -> Html Msg
+renderFunds = renderNumber
 
 
 renderFundsIncrement : Int -> Html Msg
-renderFundsIncrement incrementAmount =
-    incrementAmount |> String.fromInt |> text
+renderFundsIncrement = renderNumber
+
+
+renderNumber : Int -> Html Msg
+renderNumber n =
+    n |> String.fromInt |> text
 
 
 renderIncrementButton : Html Msg
