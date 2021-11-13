@@ -68,7 +68,7 @@ contents model =
     [ renderFunds model.fundsAmount
     , renderFundsIncrement model.incrementAmount
     , renderIncrementButton
-    , renderVersion "13"
+    , renderVersion "14"
     ]
 
 
