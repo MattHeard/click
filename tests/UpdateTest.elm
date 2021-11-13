@@ -9,7 +9,7 @@ import Update exposing (Model, Msg(..), updateModel)
 suite : Test
 suite =
     describe "the Increment message"
-        [ test "adds one to the model" <|
+        [ test "adds one to the funds amount" <|
             \_ ->
                 Expect.equal
                     (updateModel
