@@ -1,7 +1,7 @@
 module Main exposing (main)
 
 import Browser
-import Html exposing (Html, button, div, li, text, ul)
+import Html exposing (Html, button, div, li, span, text, ul)
 import Html.Events exposing (onClick)
 import Json.Decode as Decode exposing (decodeString)
 import Json.Encode as Encode exposing (encode)
@@ -73,11 +73,17 @@ contents model =
 
 
 renderFunds : Int -> Html Msg
-renderFunds = renderNumber
+renderFunds amount =
+    span
+        []
+        [ text "$ "
+        , renderNumber amount
+        ]
 
 
 renderFundsIncrement : Int -> Html Msg
-renderFundsIncrement = renderNumber
+renderFundsIncrement =
+    renderNumber
 
 
 renderNumber : Int -> Html Msg

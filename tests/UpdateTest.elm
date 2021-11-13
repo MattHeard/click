@@ -19,6 +19,7 @@ suite =
                     (buildTestModel 1)
         ]
 
+
 buildTestModel : Int -> Model
 buildTestModel fundsAmount =
     { fundsAmount = fundsAmount
