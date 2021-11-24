@@ -68,7 +68,7 @@ contents model =
     [ renderFunds model.fundsAmount
     , renderFundsIncrement model.incrementAmount
     , renderIncrementButton
-    , renderVersion "14"
+    , renderVersion "16"
     ]
 
 
@@ -82,8 +82,13 @@ renderFunds amount =
 
 
 renderFundsIncrement : Int -> Html Msg
-renderFundsIncrement =
-    renderNumber
+renderFundsIncrement amount =
+    span
+        []
+        [ text "$ "
+        , renderNumber amount
+        , text " / click of A"
+        ]
 
 
 renderNumber : Int -> Html Msg
@@ -93,7 +98,7 @@ renderNumber n =
 
 renderIncrementButton : Html Msg
 renderIncrementButton =
-    button [ onClick Increment ] [ text "+" ]
+    button [ onClick Increment ] [ text "A" ]
 
 
 renderVersion : String -> Html Msg
