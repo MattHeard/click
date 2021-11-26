@@ -65,10 +65,11 @@ view model =
 
 contents : Model -> List (Html Msg)
 contents model =
-    [ renderFunds model.fundsAmount
+    [ text "Click"
+    , renderFunds model.fundsAmount
     , renderFundsIncrement model.incrementAmount
     , renderIncrementButton
-    , renderVersion "v17"
+    , renderVersion "v18"
     ]
 
 
